@@ -107,14 +107,41 @@ class MetaCorgiSnacks
   def initialize(snack_box, box_id)
     @snack_box = snack_box
     @box_id = box_id
+    snack_box.methods.each do |method|
+        snack = method.to_s.split('_')[1]
+        next if snack.nil? 
+        snack.downcase!
+        MetaCorgiSnacks.define_snack(snack) if ["bone", "kibble", "treat"].include?(snack)
+    end
   end
 
-  def method_missing(name, *args)
+  #def method_missing(name, *args)
     # Your code goes here...
-  end
+    #info = @snack_box.send("get_#{name}_info", @box_id)
+    #tastiness = @snack_box.send("get_#{name}_tastiness", @box_id)
+    #name = name.to_s.split.map(&:capitalize).join(' ')
+    #result = "#{name}: #{info}: #{tastiness}"
+    #result = "* " + result if tastiness > 30
+    #result
+  #end
 
 
   def self.define_snack(name)
-    # Your code goes here...
+    define_method(name) do
+        info = @snack_box.send("get_#{name}_info", @box_id)
+        tastiness = @snack_box.send("get_#{name}_tastiness", @box_id)
+        name = name.to_s.split.map(&:capitalize).join(' ')
+        result = "#{name}: #{info}: #{tastiness}"
+        result = "* " + result if tastiness > 30
+        result
+    end 
   end
 end
+
+def test
+    snack_box = SnackBox.new
+    meta_snacks = MetaCorgiSnacks.new(snack_box, 1)
+    puts meta_snacks.bone
+end
+
+test
