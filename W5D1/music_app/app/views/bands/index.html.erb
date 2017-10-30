@@ -1,0 +1,7 @@
+<h1>Band Index</h1>
+
+<ul class="container">
+  <% @bands.order(:name).each do |band| %>
+    <li><%= band.name %></li>
+  <% end %>
+</ul>

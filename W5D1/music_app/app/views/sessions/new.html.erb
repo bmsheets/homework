@@ -1,0 +1,21 @@
+<h1>Log in</h1>
+
+<ul>
+  <% unless flash.now[:errors].nil? %>
+    <% flash.now[:errors].each do |error| %>
+    <li><%= error %></li>
+    <% end %>
+  <% end %>
+</ul>
+
+<form class="login-form" action="<%= session_url %>" method="post">
+  <label for="">
+    Email: <input type="text" name="user[email]">
+  </label>
+
+  <label for="">
+    Password: <input type="password" name="user[password]">
+  </label>
+
+  <input class="button" type="submit" value="Log in">
+</form>
