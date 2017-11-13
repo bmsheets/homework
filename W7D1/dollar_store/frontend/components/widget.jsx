@@ -32,6 +32,7 @@ class Widget extends React.Component {
   }
 
   render() {
+    console.log("hello");
 
     // get the store's current state and deconstruct it into 'rates'
     // and 'baseCurrency' variables
