@@ -12,3 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('content');
   ReactDOM.render(<Root store={store} />, root);
 });
+
+const applyMiddlewares = (store, ...middlewares) => {
+    let dispatch = store.dispatch;
+    for (let i = 0; i < middlewares.length; i++) {
+        dispatch = middleware(store)(dispatch);
+    }
+    const result = Object.assign({}, store, { dispatch });
+    return result;
+}
+
+const addLoggingToDispatch = store => next => action => {
+    console.log(store.getState());
+    console.log(action);
+    next(action);
+    console.log(store.getState());
+};
