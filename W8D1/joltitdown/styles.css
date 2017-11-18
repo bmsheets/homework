@@ -1,0 +1,18 @@
+body {
+  margin: auto;
+  background-image: url("splash.jpg");
+}
+
+header, main, footer {
+  width: 80%;
+  margin: auto;
+  background: white;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+img {
+  width: 100px;
+  height: auto;
+}
